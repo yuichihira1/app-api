@@ -13,6 +13,18 @@ class ApplicationController < ActionController::API
     end
   end
 
+  private
+
+    def invalid_email
+      warden.custom_failure!
+      render json: { error: t('invalid_email') }
+    end
+
+    def invalid_password
+      warden.custom_failure!
+      render json: { error: t('invalid_password')}
+    end
+  end
 end
 
 ##
