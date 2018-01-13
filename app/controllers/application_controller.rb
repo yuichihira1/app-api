@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
     auth_token = request.headers['Authorization']
 
     if auth_token
-      authenticate_with_uth_token auth_token
+      authenticate_with_auth_token auth_token
     else
       authenticate_error
     end
