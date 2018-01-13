@@ -25,7 +25,6 @@ class ApplicationController < ActionController::API
       render json: { error: t('invalid_password')}
     end
   end
-end
 
 ##
 # Authentication Failure
