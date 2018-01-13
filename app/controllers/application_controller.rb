@@ -17,6 +17,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
+    # 初回リクエストでユーザーを1件探す。
     params[:email] = request.headers['EMAIL_NAME']
     @current_user = @current_user || User.find_by(email: params[:email])
     if @current_user.nil?
