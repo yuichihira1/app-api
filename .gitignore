@@ -12,5 +12,12 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*.idea
+*~
+vendor/bundle
+.project
+.DS_Store
+.idea
+.secret
 
 .byebug_history
