@@ -7,6 +7,13 @@ class UsersController < ApplicationController
     render json: message
 end
 
+  def show
+    # get通信時のリクエストヘッダを取得
+    params[:email] = request.headers['HTTP_EMAIL']
+    @user = User.find_by(email: params[:email])
+    render json: @user, each_serializer: UserSerializer
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save!
