@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   resource :cookie, only: [:show], controller: :sessions
   resource :show, only: [:show], controller: :users
   resource :show, only: [:show], controller: :users
-  resources :users, only: [:index, :create, :show] do
+  resource :scorepost, only: [:create], controller: :scores
+  resource :scoreget, only: [:show], controller: :scores
 
+
+  resources :users, only: [:index, :create, :show] do
+    resources :scores, only: [:create, :show]
   end
 
 
