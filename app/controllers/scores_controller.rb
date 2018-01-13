@@ -1,5 +1,5 @@
 class ScoresController < ApplicationController
-  before_action :authenticate_user_from_token!, only: [:create, :show]
+  before_action :authenticate_user_from_token!, only: [:show, :create]
 
   def show
 
