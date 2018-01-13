@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
     else
       invalid_password
     end
+  end
 
     private
     def invalid_email
@@ -23,5 +24,5 @@ class SessionsController < ApplicationController
       warden.custom_failure!
       render json: { error: t('invalid_password') }
     end
-  end
+
 end
