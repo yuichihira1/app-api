@@ -2,7 +2,8 @@ class ScoresController < ApplicationController
   before_action :authenticate_user_from_token!, only: [:show, :create]
 
   def show(current_user)
-    @score =  @current_user.scores.maximum(:score)
+    @user = @current_user
+    @score =  @user.scores.maximum(:score)
     render json: @score, each_serializer: ScoreSerializer
   end
 
