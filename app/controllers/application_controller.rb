@@ -1,13 +1,16 @@
 class ApplicationController < ActionController::API
   include AbstractController::Translation
-
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+  before_action :authenticate_user_from_token!
   respond_to :json
 
-  def authenticate_user_from_token!
-    auth_token = request.headers['Authorization']
+  protected
 
-    if auth_token
-      authenticate_with_auth_token auth_token
+  def authenticate_user_from_token!
+    token = request.headers['Authorization']
+
+    if token
+      authenticate_with_token token
     else
       authenticate_error
     end
@@ -15,20 +18,26 @@ class ApplicationController < ActionController::API
 
   private
 
-    def invalid_email
-      warden.custom_failure!
-      render json: { error: t('invalid_email') }
+  def authenticate_with_token token
+    unless token.include?(':')
+      authenticate_error
+      return
     end
 
-    def invalid_password
-      warden.custom_failure!
-      render json: { error: t('invalid_password')}
+    user_id = token.split(':').first
+    user = User.where(id: user_id).first
+
+    if user && Devise.secure_compare(user.access_token, token)
+      sign_in user, store: false
+    else
+      authenticate_error
     end
   end
 
 ##
 # Authentication Failure
 # Renders a 401 error
-def authenticate_error
-  render json: { error: t('devise.failure.unauthenticated') }, status: 401
+  def authenticate_error
+    render json: { error: t('devise.failure.unauthenticated') }, status: 401
+  end
 end
