@@ -16,6 +16,16 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def current_user
+    params[:email] = request.headers['EMAIL_NAME']
+    @current_user = @current_user || User.find_by(email: params[:email])
+    if @current_user.nil?
+      User.find_by(email: params[:email])
+    else
+      @current_user
+    end
+  end
+
   private
 
   def authenticate_with_token token
