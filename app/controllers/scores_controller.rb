@@ -1,5 +1,6 @@
 class ScoresController < ApplicationController
   before_action :authenticate_user_from_token!, only: [:show, :create]
+  before_action :set_current_user, only: [:show]
 
   def show
     @user = @current_user
