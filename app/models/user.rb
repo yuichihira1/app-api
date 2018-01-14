@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   after_create :update_access_token!
 
+  validates :access_token, uniqueness: true, allow_nil: true
   validates :email, presence: true
 
 #   ユーザーidとDeviseのトークンを組み合わせてアクセストークンを生成
