@@ -16,16 +16,18 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def current_user
+  def set_current_user
     # 初回リクエストでユーザーを1件探す。
-    params[:email] = request.headers['EMAIL_NAME']
-    @current_user = @current_user || User.find_by(email: params[:email])
+    params[:access_token] = request.headers['Authorization']
+    @current_user ||= User.find_by(access_token: params[:access_token])
     if @current_user.nil?
-      User.find_by(email: params[:email])
+      User.find_by(access_token: params[:access_token])
     else
       @current_user
     end
   end
+
+
 
   private
 
