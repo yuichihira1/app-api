@@ -1,15 +1,19 @@
 class ScoresController < ApplicationController
   before_action :authenticate_user_from_token!, only: [:show, :create]
 
-  def show(current_user)
+  def show
     @user = @current_user
-    @score =  @user.scores.maximum(:score)
-    render json: @score, each_serializer: ScoreSerializer
+    @score =  @user.score.maximum(:score)
+    if @score.nil?
+      render json: @score, each_serializer: ScoreSerializer
+    else
+      render json: { error: '404 error' }, status: 404
+    end
   end
 
   def create
     @score = Score.create(score_params)
-    if score.save
+    if @score.save!
       render json: @score, serializer: ScoreSerializer, root: nil
     else
       render json: { error: t('score_save_error') }, status: :unprocessable_entity
