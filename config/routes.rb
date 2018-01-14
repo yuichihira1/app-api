@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resource :login, only: [:create], controller: :sessions
   resource :cookie, only: [:show], controller: :sessions
   resource :show, only: [:show], controller: :users
-  resource :show, only: [:show], controller: :users
   resource :scorepost, only: [:create], controller: :scores
   resource :scoreget, only: [:show], controller: :scores
 
