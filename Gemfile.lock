@@ -50,6 +50,7 @@ GEM
       actionpack
       activesupport (>= 3.0.0)
       rspec
+    awesome_print (1.8.0)
     bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.1.0)
@@ -88,9 +89,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
-    json_spec (1.1.5)
-      multi_json (~> 1.0)
-      rspec (>= 2.0, < 4.0)
+    json (2.1.0)
     jsonapi-renderer (0.2.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -105,7 +104,6 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.1)
-    multi_json (1.13.1)
     mysql2 (0.4.10)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -163,6 +161,9 @@ GEM
     rspec-expectations (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
+    rspec-json_matcher (0.1.6)
+      awesome_print
+      json
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
@@ -215,13 +216,13 @@ DEPENDENCIES
   database_rewinder
   devise
   factory_bot_rails (~> 4.0)
-  json_spec
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.3.18, < 0.5)
   pry-rails
   puma (~> 3.7)
   rack-cors
   rails (~> 5.1.4)
+  rspec-json_matcher
   rspec-rails
   rspec-request_describer
   spring

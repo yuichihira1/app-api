@@ -34,7 +34,7 @@ group :test do
   gem "database_rewinder"
   gem "rspec-request_describer"
   gem "autodoc"
-  gem "json_spec"
+  gem "rspec-json_matcher"
 end
 
 
