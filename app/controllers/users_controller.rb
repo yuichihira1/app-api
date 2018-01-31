@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user_from_token!, only: [:index, :create]
-  before_action :set_current_user, only: [:show]
+  before_action :set_user, only: [:show]
 
   def index
   # サーバーにアクセスした時に表示する。
@@ -9,10 +9,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    # get通信時のリクエストヘッダを取得
-    @current_user
-    if @current_user.nil?
-      render json: @current_user, each_serializer: UserSerializer, root: nil
+    if @user = true
+      render json: @user, each_serializer: UserSerializer
     else
       render json: { error: '404 error' }, status: 404
     end
@@ -30,9 +28,8 @@ class UsersController < ApplicationController
 
   private
 
-
   def user_params
-    params.require(:user).permit(:email, :password, :name)
+    params.require(:user).permit(:email, :password, :name, :access_token)
   end
 
 end
