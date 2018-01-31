@@ -28,3 +28,13 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails", "~> 4.0"
+  gem "database_rewinder"
+  gem "rspec-request_describer"
+  gem "autodoc"
+  gem "json_spec"
+end
+
+
