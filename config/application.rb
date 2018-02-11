@@ -33,5 +33,17 @@ module AppApi
     config.to_prepare do
       DeviseController.respond_to :json
     end
+    config.generators do |g|
+      g.test_framework :rspec,
+                       fixtures: true,
+                       view_specs: false,
+                       helper_specs: true,
+                       routing_specs: false,
+                       controller_specs: false,
+                       request_specs: true
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
   end
+
+
 end
